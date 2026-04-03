@@ -71,6 +71,7 @@ echo "before";
 
 if (isset($_POST["btn"])) {
 
+
 echo "After";
 
     $email = $_POST['email'];
