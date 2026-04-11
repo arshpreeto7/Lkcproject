@@ -81,7 +81,7 @@ include("adminheader.php");
                             <td>$row[description]</td>
                             <td>$row[image]</td>
                             <td><a href='deleteCategory.php?id=$row[id]' class='btn btn-danger'>Delete </a></td>
-                            <td><button class='btn btn-success'>Update</button></td>
+                            <td><a href='updatecategory.php?id=$row[id]' class='btn btn-success'>Update</a></td>
                         </tr>";
                         }
 
