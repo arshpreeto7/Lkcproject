@@ -79,7 +79,7 @@ include("adminheader.php");
                             <td>$i</td>
                             <td>$row[name]</td>
                             <td>$row[description]</td>
-                            <td>$row[image]</td>
+                            <td><img width='100px' src='../upload/$row[image]' alt='no image' ></td>
                             <td><a href='deleteCategory.php?id=$row[id]' class='btn btn-danger'>Delete </a></td>
                             <td><a href='updatecategory.php?id=$row[id]' class='btn btn-success'>Update</a></td>
                         </tr>";

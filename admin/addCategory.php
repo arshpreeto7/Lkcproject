@@ -52,7 +52,7 @@ include("adminheader.php");
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <!-- <h3 class="mb-4">Need a functional contact form?</h3>
                     <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="row g-3  ">
 
                         <div class="col-md-12">
@@ -102,15 +102,31 @@ if (isset($_POST['btn'])) {
 
     $cateName = $_POST['CateName'];
     $CateDescription = $_POST['CateDescription'];
+    $Image = $_FILES['Image'];
+
+    // print_r($Image);
+
+    $Image_name=$Image['name'];
+    $tmp_name=$Image['tmp_name'];
+
+    // echo $Image_name;
+    // echo $tmp_name;
+
+
+    $new_name=rand().$Image_name;
+
+    // echo $new_name;
 
     include("../config.php");
 
-    $query = "INSERT INTO `category`( `name`, `description`, `image`) VALUES ('$cateName','$CateDescription','NO-Image')";
+    $query = "INSERT INTO `category`( `name`, `description`, `image`) VALUES ('$cateName','$CateDescription','$new_name')";
 
     $result = mysqli_query($db, $query);
 
     //    print_r($result);
+    move_uploaded_file($tmp_name,"../upload/".$new_name);
     if ($result) {
+
 
         echo "<script>window.location.assign('addCategory.php?msg=Category added Successfull')</script>";
     } else {

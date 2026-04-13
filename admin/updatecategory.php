@@ -5,7 +5,7 @@ include("adminheader.php");
 
 <?php
 
-$id =$_GET['id'];
+$id = $_GET['id'];
 
 include("../config.php");
 $query = "SELECT * FROM `category` WHERE id='$id' ";
@@ -13,7 +13,7 @@ $result = mysqli_query($db, $query);
 
 // print_r($result);
 
-$data=mysqli_fetch_assoc($result);
+$data = mysqli_fetch_assoc($result);
 
 
 ?>
@@ -69,18 +69,18 @@ $data=mysqli_fetch_assoc($result);
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                 <!-- <h3 class="mb-4">Need a functional contact form?</h3>
                     <p class="mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p> -->
-                <form method="POST">
+                <form method="POST" enctype="multipart/form-data">
                     <div class="row g-3  ">
 
                         <div class="col-md-12">
                             <div class="form-floating">
-                                <input value="<?php echo $data['name']?>" type="text" name="CateName" class="form-control" id="name" placeholder="Your Name">
+                                <input value="<?php echo $data['name'] ?>" type="text" name="CateName" class="form-control" id="name" placeholder="Your Name">
                                 <label for="name">Category Name</label>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-floating">
-                                <input type="text" value="<?php echo $data['description']?>" name="CateDescription" class="form-control" id="name" placeholder="Your Name">
+                                <input type="text" value="<?php echo $data['description'] ?>" name="CateDescription" class="form-control" id="name" placeholder="Your Name">
                                 <label for="name">Description</label>
                             </div>
                         </div>
@@ -119,10 +119,24 @@ if (isset($_POST['btn'])) {
 
     $cateName = $_POST['CateName'];
     $CateDescription = $_POST['CateDescription'];
+    $Image = $_FILES['Image'];
+
+    if ($Image['name']) {
+
+        $Image_name = $Image['name'];
+        $tmp_name = $Image['tmp_name'];
+
+        $new_name = rand() . $Image_name;
+        move_uploaded_file($tmp_name, "../upload/" . $new_name);
+    } else {
+        // echo "no image";
+        $new_name=$data['image'];
+    }
+
 
     include("../config.php");
 
-    $query = "UPDATE `category` SET `name`='$cateName',`description`='$CateDescription' WHERE id='$id'";
+    $query = "UPDATE `category` SET `name`='$cateName',`description`='$CateDescription' ,`image`='$new_name' WHERE id='$id'";
 
     $result = mysqli_query($db, $query);
 
