@@ -95,7 +95,7 @@ if (isset($_POST["btn"])) {
 
 
     include("./config.php");
-    $query = "SELECT * FROM `admin` WHERE email='$email' AND password='$password'";
+    $query = "SELECT * FROM `users` WHERE email='$email' AND password='$password'";
     $result = mysqli_query($db, $query);
 
     // print_r(mysqli_num_rows($result));
@@ -103,12 +103,7 @@ if (isset($_POST["btn"])) {
 
     if (mysqli_num_rows($result) > 0) {
 
-        $data = mysqli_fetch_assoc($result);
-
-        $_SESSION['email'] = $email;
-        $_SESSION['userId'] = $data['id'];
-        $_SESSION['name'] = $data['name'];
-
+                        $_SESSION['email']=$email;
         echo "<script>window.location.assign('admin/admin.php?msg=Login Successfully')</script>";
     } else {
         echo "<script>window.location.assign('login.php?err=Email and password Does't match')</script>";

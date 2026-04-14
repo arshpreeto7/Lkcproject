@@ -1,3 +1,12 @@
+<?php
+
+    session_start();
+    if(!isset($_SESSION['email'])){
+        echo "<script>window.location.assign('/Lkcproject/login.php?err=Login is required')</script>";
+
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
