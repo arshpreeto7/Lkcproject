@@ -88,8 +88,34 @@
                        
                     </div>
                 </div>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">products</a>
+                    <div class="dropdown-menu bg-light m-0">
+                        <a href="AddProducts.php" class="dropdown-item">Add</a>
+                        <a href="manageProducts.php" class="dropdown-item">Manage</a>
+                       
+                    </div>
+                </div>
+
+
                 <!-- <a href="contact.php" class="nav-item nav-link">Contact</a> -->
-                <a href="login.php" class="nav-item nav-link">login</a>
+
+
+                <?php
+                    if(isset($_SESSION['email'])){
+                        ?>
+                <a href="../logout.php" class="nav-item nav-link">Logout</a>
+
+                        <?php
+                    }else{
+
+                    ?>
+      <a href="login.php" class="nav-item nav-link">login</a>
+                    <?php
+
+                    }
+                ?>
+              
             </div>
             <div class="border-start ps-4 d-none d-lg-block">
                 <button type="button" class="btn btn-sm p-0"><i class="fa fa-search"></i></button>
